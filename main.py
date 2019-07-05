@@ -20,6 +20,7 @@ class Preprocessor:
         MessageHdlr.consumeMessage(queue, callback)
 
 if __name__ == "__main__":
+    print(config.RABBITMQ_CONNECTION)
     ## Send dummy message
     MessageHdlr.sendMessage('from_preprocessor','Dummy test message from Preprocessor')
     model_preprocessor = Preprocessor()

@@ -1,14 +1,14 @@
+import pika
 import sys
 import os
 sys.path.append(os.getcwd())
 import config
-import pika
-
 
 class MessageHandler:
     def __init__(self, host):
+        params = pika.ConnectionParameters(host=config.RABBITMQ_CONNECTION)
         self.connection = pika.BlockingConnection(
-            pika.ConnectionParameters(config.RABBITMQ_CONNECTION))
+            parameters=params)
         self.channel = self.connection.channel()
         self.channel.queue_declare('from_client')
         self.channel.queue_declare('from_creator')
@@ -27,4 +27,5 @@ class MessageHandler:
         self.channel.start_consuming()
 
 
+print(config.RABBITMQ_CONNECTION)
 MessageHdlr = MessageHandler(config.RABBITMQ_CONNECTION)
