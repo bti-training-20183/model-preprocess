@@ -17,8 +17,8 @@ def callback(channel, method, properties, body):
     # TODO: PREPROCESSING DATA
     print("Faking Processing Data")
     # THEN UPLOAD TO MINIO
-    fullname = received_msg['name']
-    filename, file_extension = os.path.splitext(fullname)
+    filename = received_msg['name']
+    file_extension = received_msg['type']
     from_path = to_path  # dummy test
     to_path = filename + '/preprocessed/' + filename + file_extension
     DataStore_Handler.upload(from_path, to_path)

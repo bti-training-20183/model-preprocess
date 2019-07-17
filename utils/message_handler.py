@@ -40,9 +40,5 @@ class MessageHandler:
             queue=queue, on_message_callback=callback, auto_ack=True)
         print(f' [*] Waiting for messages from {queue}. To exit press CTRL+C')
         self.channel.start_consuming()
-    
-    def close(self):
-        self.connection.close()
-
 
 Message_Handler = MessageHandler(config.RABBITMQ_CONNECTION)
