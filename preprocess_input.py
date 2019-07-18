@@ -9,7 +9,7 @@ class DataCleaning():
     
     def handle_missing_data(self):
         self.data_frame.fillna(0)
-    
+
     def handle_outlier_data(self):
         # TODO
         pass
