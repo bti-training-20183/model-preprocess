@@ -30,7 +30,7 @@ def callback(channel, method, properties, body):
     filename = received_msg['name']
     file_extension = received_msg['type']
     from_path = to_path  # dummy test
-    to_path = filename + '/preprocessed/' + filename + file_extension
+    to_path = filename + '/preprocessed/' + filename + '.csv'
 
     DataStore_Handler.upload(from_path, to_path)
     os.remove(from_path)
