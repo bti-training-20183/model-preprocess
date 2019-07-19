@@ -22,6 +22,3 @@ class DataCleaning():
         std_signal = (signal - np.mean(signal)) / np.std(signal)
         outlier_points = self._detect_outliers(std_signal)
         self.data_frame = self.data_frame.drop(outlier_points, axis=0)
-
-
-
