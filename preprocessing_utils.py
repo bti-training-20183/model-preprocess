@@ -13,7 +13,7 @@ def convert_file_to_csv(filename):
         txt_data_frame.to_csv(filename.replace(file_extension, '.csv'))
     elif file_extension == '.xls' or file_extension == '.xlsx':
         exel_data_frame = pd.read_excel(filename, index_col=None)
-        exel_data_frame.to_csv(filename.replace(file_extension, '.csv'), encoding='utf-8', index=False)
+        exel_data_frame.to_csv('tmp/' + filename.replace(file_extension, '.csv'), encoding='utf-8', index=False)
 
 
 def calculate_rsi(values):
