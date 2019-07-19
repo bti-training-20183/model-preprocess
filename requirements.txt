@@ -1,9 +1,9 @@
 pymongo==3.8.0
 pika==1.0.1
 minio==4.0.18
-pandas
-tensorflow
-scikit-learn
-statsmodels
-matplotlib
-seaborn
+pandas==0.24.2
+tensorflow==1.14.0
+scikit-learn==0.21.2
+statsmodels==0.10.0
+matplotlib==3.1.1
+seaborn=0.9.0
