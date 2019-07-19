@@ -101,4 +101,4 @@ class FeaturesAdding():
 
     def drop_unwanted_columns(self):
         columns2Drop = ['UpMove', 'DownMove', 'ATR', 'PlusDM', 'MinusDM', 'Zero', 'EMA', 'HL', 'absHC', 'absLC', 'TR']
-        self.data_frame = self.data_frame.drop(labels=columns2Drop, axis=1)
+        self.data_frame = self.data_frame.drop(labels=columns2Drop, axis=1) 

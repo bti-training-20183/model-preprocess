@@ -10,7 +10,18 @@ class DataCleaning():
     def handle_missing_data(self):
         self.data_frame.fillna(0)
 
+    def _detect_outliers(signal, threshold=2.0):
+        detected = []
+        for i in range(len(signal)):
+            if np.abs(signal[i]) > threshold:
+                detected.append(i)
+        return detected
+
     def handle_outlier_data(self):
-        # TODO
-        pass
+        signal = np.copy(self.data_frame.Close.values)
+        std_signal = (signal - np.mean(signal)) / np.std(signal)
+        outlier_points = self._detect_outliers(std_signal)
+        self.data_frame = self.data_frame.drop(outlier_points, axis=0)
+
+
 

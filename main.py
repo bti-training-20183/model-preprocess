@@ -4,8 +4,8 @@ from utils.database_handler import Database_Handler
 import os
 import sys
 import config
-import time
 import json
+import time
 sys.path.append(os.getcwd())
 
 
