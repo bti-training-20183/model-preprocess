@@ -25,7 +25,7 @@ class DataCleaning():
 
     def drop_unwanted_columns(self):
         unwanted_columns = ['Date', 'OpenInt']
-        self.data_frame.drop(unwanted_columns, axis=1)
+        self.data_frame = self.data_frame.drop(unwanted_columns, axis=1)
 
     def save_preprocessed_file(self, path_file):
         self.data_frame.to_csv(path_file, header=None, index=False)
