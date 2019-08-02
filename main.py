@@ -35,13 +35,26 @@ def callback(channel, method, properties, body):
     DataStore_Handler.upload(from_path, to_path)
     os.remove(from_path)
     # SAVE LOGS TO MONGO
+    logs = {
+        "name": filename,
+        "type": file_extension,
+        'date': time.strftime("%Y-%m-%d %H:%M:%S"),
+        "file_uri": to_path,
+        # TODO add algorithm
+        'algorithm': '',
+        'cloud_server_id': received_msg.get('cloud_server_id', '')
+    }
+    logged_info = Database_Handler.insert(logs)
+    # SEND MESSAGE TO MODEL CREATOR
     msg = {
         "name": filename,
         "type": file_extension,
-        # TODO: Add Date
-        "file_uri": to_path
+        'date': time.strftime("%Y-%m-%d %H:%M:%S"),
+        "file_uri": to_path,
+        # TODO add algorithm
+        'algorithm': '',
+        'preprocessor_id': logged_info.inserted_id
     }
-    # SEND MESSAGE TO MODEL CREATOR
     Message_Handler.sendMessage('from_preprocessor', json.dumps(msg))
 
 
