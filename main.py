@@ -28,7 +28,6 @@ def callback(channel, method, properties, body):
 
     # THEN UPLOAD TO MINIO
     filename = received_msg['name']
-    file_extension = received_msg['type']
     from_path = to_path  # dummy test
     to_path = filename + '/preprocessed/' + filename + '.csv'
 
@@ -37,23 +36,19 @@ def callback(channel, method, properties, body):
     # SAVE LOGS TO MONGO
     logs = {
         "name": filename,
-        "type": file_extension,
+        "type": '.csv',
         'date': time.strftime("%Y-%m-%d %H:%M:%S"),
         "file_uri": to_path,
-        # TODO add algorithm
-        'algorithm': '',
         'cloud_server_id': received_msg.get('cloud_server_id', '')
     }
     logged_info = Database_Handler.insert(logs)
     # SEND MESSAGE TO MODEL CREATOR
     msg = {
         "name": filename,
-        "type": file_extension,
+        "type": '.csv',
         'date': time.strftime("%Y-%m-%d %H:%M:%S"),
         "file_uri": to_path,
-        # TODO add algorithm
-        'algorithm': '',
-        'preprocessor_id': logged_info.inserted_id
+        'preprocessor_id': str(logged_info.inserted_id)
     }
     Message_Handler.sendMessage('from_preprocessor', json.dumps(msg))
 
