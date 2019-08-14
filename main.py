@@ -1,5 +1,5 @@
 from utils.datastore_handler import DataStore_Handler
-from utils.message_handler import Message_Handler
+from utils.message_handler import Message_Handler, MessageHandler
 from utils.database_handler import Database_Handler
 from preprocess_input import *
 from preprocessing_utils import *
@@ -41,7 +41,7 @@ def callback(channel, method, properties, body):
         "file_uri": to_path,
         'cloud_server_id': received_msg.get('cloud_server_id', '')
     }
-    logged_info = Database_Handler.insert(logs)
+    logged_info = Database_Handler.insert(config.MONGO_COLLECTION, logs)
     # SEND MESSAGE TO MODEL CREATOR
     msg = {
         "name": filename,
@@ -50,7 +50,7 @@ def callback(channel, method, properties, body):
         "file_uri": to_path,
         'preprocessor_id': str(logged_info.inserted_id)
     }
-    Message_Handler.sendMessage('from_preprocessor', json.dumps(msg))
+    MessageHandler(config.RABBITMQ_CONNECTION).sendMessage('from_preprocessor', json.dumps(msg))
 
 
 class Preprocessor:
